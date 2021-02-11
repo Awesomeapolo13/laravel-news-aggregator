@@ -1,0 +1,28 @@
+2021-02-10 20:05:48,624 INFO Set uid to user 0 succeeded
+2021-02-10 20:05:48,647 INFO supervisord started with pid 17
+2021-02-10 20:05:49,652 INFO spawned: 'php' with pid 19
+2021-02-10 20:05:50,656 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-02-10 20:15:42,118 INFO Set uid to user 0 succeeded
+2021-02-10 20:15:42,136 INFO supervisord started with pid 9
+2021-02-10 20:15:43,150 INFO spawned: 'php' with pid 11
+2021-02-10 20:15:44,156 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-02-10 20:20:36,245 INFO Set uid to user 0 succeeded
+2021-02-10 20:20:36,254 INFO supervisord started with pid 8
+2021-02-10 20:20:37,258 INFO spawned: 'php' with pid 10
+2021-02-10 20:20:38,261 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-02-11 09:17:00,863 INFO Set uid to user 0 succeeded
+2021-02-11 09:17:00,877 INFO supervisord started with pid 17
+2021-02-11 09:17:01,882 INFO spawned: 'php' with pid 19
+2021-02-11 09:17:02,884 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-02-11 09:41:17,793 INFO Set uid to user 0 succeeded
+2021-02-11 09:41:17,800 INFO supervisord started with pid 16
+2021-02-11 09:41:18,804 INFO spawned: 'php' with pid 18
+2021-02-11 09:41:19,806 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-02-11 16:02:53,644 INFO Set uid to user 0 succeeded
+2021-02-11 16:02:53,657 INFO supervisord started with pid 17
+2021-02-11 16:02:54,704 INFO spawned: 'php' with pid 19
+2021-02-11 16:02:55,730 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-02-11 18:24:30,976 INFO Set uid to user 0 succeeded
+2021-02-11 18:24:30,987 INFO supervisord started with pid 16
+2021-02-11 18:24:31,996 INFO spawned: 'php' with pid 18
+2021-02-11 18:24:33,000 INFO success: php entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
