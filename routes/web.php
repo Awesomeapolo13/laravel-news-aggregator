@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HelloController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,18 +21,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello/{name}', function (string $name) {
-    return "Hello, " . $name;
+//Страница приветствия
+Route::get('/hello', [HelloController::class, 'index']);
+
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::resource('news', AdminNewsController::class);
 });
 
-Route::get('/about', function () {
-    return "<h1>Page about us</h1>";
+//Группа страниц для оторажения новостей
+//Группа роутов (prefix - префикс для группы роутов, as - превикс для нейминга)
+Route::group(['prefix' => 'news', 'as' => 'news.'], function () {
+    // Теперь не нужно писать везде news
+    // Страница отображения категорий и перечня всех новостей
+    Route::get('/', [NewsController::class, 'index'])
+        ->name('index');
+
+    // Страница отображения новостей, принадлежащих одной категории
+    Route::get('/{category}', [NewsController::class, 'category'])
+        ->where('category', '\w+')
+        ->name('category');
+
+    // Страница отображения страницы конкретной новости
+    Route::get('/{category}/{id}', [NewsController::class, 'show'])
+        ->where('category', '\w+')
+        ->where('id', '\d+')
+        ->name('show');
 });
 
-Route::get('/news', function () {
-    return "<h1>Page with news list</h1>";
-});
+// Страница добавления новости
+Route::get('/add', [NewsController::class, 'add'])
+    ->name('add');
 
-Route::get('/news/{id}', function ($id) {
-    return "<h1>Page with news number $id</h1>";
-});
+// Страница авторизации
+Route::get('/auth', [AuthController::class, 'index'])
+    ->name('index');
