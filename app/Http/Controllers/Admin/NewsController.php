@@ -16,7 +16,8 @@ class NewsController extends Controller
     {
         //Отвечает за вывод всех записей
 
-        dd(app()); //dump and die - выводит дамп и заканчивает выполнение
+//        dd(app()); //dump and die - выводит дамп и заканчивает выполнение
+
     }
 
     /**

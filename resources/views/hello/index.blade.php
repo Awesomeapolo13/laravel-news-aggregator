@@ -1,7 +1,14 @@
-<?php
+@extends('layouts.main')
 
-include base_path() . '/resources/views/base/header.php';
-?>
+@section('title')
+    {{ $title }} @parent
+@endsection
+
+@section('header')
+    {{ $title }}
+@endsection
+
+@section('content')
 
     <h1>Welcome to News Aggregator</h1>
 
@@ -11,5 +18,5 @@ include base_path() . '/resources/views/base/header.php';
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid distinctio dolores illum, iusto laborum odio
         omnis porro qui quia quos, ratione sint ut voluptate. Accusantium fugiat illo soluta veniam voluptate.</p>
 
-<?php include base_path() . '/resources/views/base/footer.php';
+@endsection
 

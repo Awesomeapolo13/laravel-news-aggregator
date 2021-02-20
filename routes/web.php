@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HelloController;
+use \App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 /*
@@ -22,10 +23,13 @@ Route::get('/', function () {
 });
 
 //Страница приветствия
-Route::get('/hello', [HelloController::class, 'index']);
+Route::get('/hello', [HelloController::class, 'index'])
+    ->name('hello');
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('/', [IndexController::class, 'index'])
+        ->name('admin');
     Route::resource('news', AdminNewsController::class);
 });
 
@@ -55,4 +59,4 @@ Route::get('/add', [NewsController::class, 'add'])
 
 // Страница авторизации
 Route::get('/auth', [AuthController::class, 'index'])
-    ->name('index');
+    ->name('auth');
