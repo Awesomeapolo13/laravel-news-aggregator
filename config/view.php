@@ -12,7 +12,7 @@ return [
     | the usual Laravel view path has already been registered for you.
     |
     */
-
+    //Откуда брать представления
     'paths' => [
         resource_path('views'),
     ],
@@ -27,7 +27,7 @@ return [
     | directory. However, as usual, you are free to change this value.
     |
     */
-
+    //Где компилируются наши представления(/storage/framework/views - хранилище закешированных представлений)
     'compiled' => env(
         'VIEW_COMPILED_PATH',
         realpath(storage_path('framework/views'))
