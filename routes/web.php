@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HelloController;
-use \App\Http\Controllers\Admin\IndexController;
+use \App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\CategoryController;
+use \App\Http\Controllers\Admin\DownloadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/', [IndexController::class, 'index'])
         ->name('admin');
     Route::resource('news', AdminNewsController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('download', DownloadController::class);
 });
 
 //Группа страниц для оторажения новостей
@@ -60,3 +65,5 @@ Route::get('/add', [NewsController::class, 'add'])
 // Страница авторизации
 Route::get('/auth', [AuthController::class, 'index'])
     ->name('auth');
+
+Route::resource('feedback', FeedbackController::class);

@@ -4,8 +4,8 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">News list</h1> &nbsp; <strong>
-                <a href="{{ route('admin.news.create') }}">Add news</a></strong>
+            <h1 class="h3 mb-0 text-gray-800">Categories list</h1> &nbsp; <strong>
+                <a href="{{ route('admin.categories.create') }}">Add category</a></strong>
         </div>
 
         <!-- Content Row -->
@@ -20,7 +20,7 @@
                         Title
                     </th>
                     <th>
-                        Category
+                        Slug
                     </th>
                     <th>
                         Additions date
@@ -28,25 +28,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($newsList as $news)
+                @forelse($categories as $category)
                     <tr>
                         <td>
-                            {{ $news->id }}
+                            {{ $category->id }}
                         </td>
                         <td>
-                            {{ $news->title }}
+                            {{ $category->title }}
                         </td>
                         <td>
-                            {{ $news->category }}
+                            {{ $category->slug }}
                         </td>
                         <td>
-                            {{ $news->created_at }}
+                            {{ $category->created_at }}
                         </td>
                     </tr>
                 @empty
                     <tr>
                         <td colspan="4">
-                            <h2>No news found</h2>
+                            <h2>No categories found</h2>
                         </td>
                     </tr>
                 @endforelse
