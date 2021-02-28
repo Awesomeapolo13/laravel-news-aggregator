@@ -33,6 +33,9 @@
                     <a class="nav-link" href="{{ route('add') }}">Add news</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('feedback.create') }}">Feedback</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('auth') }}">Sign in</a>
                 </li>
             </ul>

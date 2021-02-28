@@ -1,12 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class FeedbackController extends Controller
 {
+    /**
+     * @var string - заголовок страницы
+     */
+    protected $title = 'Feedback';
+
+    /**
+     * @var string[] - массив категорий для новостей
+     */
+    protected $categories = [
+        'Native',
+        'Political',
+        'Ecological',
+        'Sports',
+        'IT',
+        'Global'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -14,10 +30,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //Отвечает за вывод всех записей
-        $newsList = [];
-        return view('admin.news.index', ['newsList' => $newsList]);
-
+        return view('feedback.index', ['title' => $this->title, 'categories' => $this->categories]);
     }
 
     /**
@@ -27,8 +40,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //Обрабатывается гет-запросом для вывода формы добавления записи
-        return view('admin.news.add');
+        return view('feedback.index', ['title' => $this->title, 'categories' => $this->categories]);
     }
 
     /**
@@ -39,7 +51,11 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //Обрабатывает запись которую добавляют в методе create
+        $request->validate([
+            'name' => 'required',
+            'comment' => 'required',
+        ]);
+        dd($request);
     }
 
     /**
@@ -50,7 +66,7 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //Отображает запись
+        //
     }
 
     /**
@@ -61,7 +77,7 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //Отображает форму редактирования записи
+        //
     }
 
     /**
@@ -73,7 +89,7 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Обрабатывает форму отображенную edit
+        //
     }
 
     /**
@@ -84,6 +100,6 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //Удаляет запись
+        //
     }
 }
