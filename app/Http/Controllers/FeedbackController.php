@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -12,25 +13,14 @@ class FeedbackController extends Controller
     protected $title = 'Feedback';
 
     /**
-     * @var string[] - массив категорий для новостей
-     */
-    protected $categories = [
-        'Native',
-        'Political',
-        'Ecological',
-        'Sports',
-        'IT',
-        'Global'
-    ];
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('feedback.index', ['title' => $this->title, 'categories' => $this->categories]);
+        $categories = (new Category())->getCategories();
+        return view('feedback.index', ['title' => $this->title, 'categories' => $categories]);
     }
 
     /**
@@ -40,7 +30,8 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        return view('feedback.index', ['title' => $this->title, 'categories' => $this->categories]);
+        $categories = (new Category())->getCategories();
+        return view('feedback.index', ['title' => $this->title, 'categories' => $categories]);
     }
 
     /**

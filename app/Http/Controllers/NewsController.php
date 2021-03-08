@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ArrHelper;
+use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -10,202 +13,6 @@ class NewsController extends Controller
      * @var string - заголовок страницы
      */
     protected $title = 'News';
-    /**
-     * @var string[] - массив категорий для новостей
-     */
-    protected $categories = [
-        'Native',
-        'Political',
-        'Ecological',
-        'Sports',
-        'IT',
-        'Global'
-    ];
-    /**
-     * @var \string[][] - массив новостей
-     */
-    protected $listNews = [
-        [
-            'category' => 'native',
-            'title' => 'Native News 1',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'political',
-            'title' => 'Political News 1',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'ecological',
-            'title' => 'Ecological News 1',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'sports',
-            'title' => 'Sports News 1',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'it',
-            'title' => 'IT News 1',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'global',
-            'title' => 'Global News 2',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'native',
-            'title' => 'Native News 2',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'political',
-            'title' => 'Political News 2',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'ecological',
-            'title' => 'Ecological News 2',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'sports',
-            'title' => 'Sports News 2',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'it',
-            'title' => 'IT News 2',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'global',
-            'title' => 'Global News 2',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'native',
-            'title' => 'Native News 3',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'political',
-            'title' => 'Political News 3',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'ecological',
-            'title' => 'Ecological News 3',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'sports',
-            'title' => 'Sports News 3',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'it',
-            'title' => 'IT News 3',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-        [
-            'category' => 'global',
-            'title' => 'Global News 3',
-            'subtitle' => 'Short description of news',
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque doloremque, doloribus est
-                illo, incidunt inventore laboriosam perferendis quis ratione repudiandae temporibus voluptates
-                voluptatibus? Beatae earum labore possimus reprehenderit totam.',
-            'author' => 'Interesting Author',
-            'created_at' => 'September 24, 2019'
-        ],
-    ];
 
     /**
      * Метод отображения страницы с категориями новостей и перечнем всех новостей
@@ -213,7 +20,11 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('news.index', ['title' => $this->title, 'listNews' => $this->listNews, 'categories' => $this->categories]);
+        $categories = (new Category())->getCategories();
+        $newsList = (new News())->getNews();
+        $newsList = ArrHelper::transformNewsArr(json_decode($newsList, true), 'category');
+
+        return view('news.index', ['title' => $this->title, 'newsList' => $newsList, 'categories' => $categories]);
     }
 
     /**
@@ -223,13 +34,11 @@ class NewsController extends Controller
      */
     public function category(string $category)
     {
-        if ($category === 'it') {
-            $category = 'it';
-        } else {
-            $category = in_array(mb_convert_case($category, MB_CASE_TITLE, "UTF-8"), $this->categories) ? $category : "News is not found";
-        }
+        $categories = (new Category())->getCategories();
+        $newsList = (new News())->getNews();
+        $newsList = ArrHelper::transformNewsArr(json_decode($newsList, true), 'category');
 
-        return view('news.category', ['title' => $this->title, 'currentCategory' => $category, 'listNews' => $this->listNews, 'categories' => $this->categories]);
+        return view('news.category', ['title' => $this->title, 'currentCategory' => $category, 'newsList' => $newsList, 'categories' => $categories]);
     }
 
     /**
@@ -240,8 +49,12 @@ class NewsController extends Controller
      */
     public function show(string $category, int $id)
     {
-        $news = $this->listNews[$id]['category'] === $category ? $this->listNews[$id] : "News is not found";
-        return view('news.show', ['title' => $this->title, 'currentCategory' => $category, 'categories' => $this->categories, 'news' => $news]);
+        $categories = (new Category())->getCategories();
+        $newsList = (new News())->getNews();
+        $newsList = ArrHelper::transformNewsArr(json_decode($newsList, true), 'category');
+        $news = ArrHelper::foundNews($newsList, $id, $category);
+
+        return view('news.show', ['title' => $this->title, 'currentCategory' => $category, 'categories' => $categories, 'news' => $news]);
     }
 
     /**
@@ -250,6 +63,8 @@ class NewsController extends Controller
      */
     public function add()
     {
-        return view('news.add', ['title' => $this->title, 'subtitle' => 'Add news', 'categories' => $this->categories]);
+        $categories = (new Category())->getCategories();
+
+        return view('news.add', ['title' => $this->title, 'subtitle' => 'Add news', 'categories' => $categories]);
     }
 }

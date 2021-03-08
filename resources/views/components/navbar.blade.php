@@ -22,8 +22,8 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownCategories">
                         @forelse($categories as $category)
-                            <li><a href="{{ route('news.category', ['category' => strtolower($category)]) }}"
-                                   class="dropdown-item">{{ $category }}</a></li>
+                            <li><a href="{{ route('news.category', ['category' => strtolower($category->title)]) }}"
+                                   class="dropdown-item">{{ $category->title }}</a></li>
                         @empty
                             <li><a href="#" class="dropdown-item">Categories not found</a></li>
                         @endforelse

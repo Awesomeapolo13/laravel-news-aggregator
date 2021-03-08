@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <h4>{{ $news['title'] }}</h4>
-                    {{ $news['body'] }}
+                    {{ $news['description'] }}
                     <p><a href="{{ route('admin.news.index') }}">В админку</a></p>
                 </div>
             </div>

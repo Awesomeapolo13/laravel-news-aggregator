@@ -25,6 +25,9 @@
                     <th>
                         Additions date
                     </th>
+                    <th>
+                        Management
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +44,10 @@
                         </td>
                         <td>
                             {{ $category->created_at }}
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.categories.show', ['category' => $category->id]) }}">Show.</a> &nbsp; <a
+                                href="">Upd.</a> &nbsp; <a href="">Del.</a>
                         </td>
                     </tr>
                 @empty

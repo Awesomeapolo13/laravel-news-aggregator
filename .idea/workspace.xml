@@ -2,25 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="385a2af6-3791-40b0-bdf4-625bb01182c1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/news/add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/news/categories/add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/news/categories/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/news/categories/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/news/download/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/news/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/feedback/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7e9d56ca-2b58-4c7c-9294-7e3cae73ce60.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7e9d56ca-2b58-4c7c-9294-7e3cae73ce60/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/geekbr_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/geekbr_project.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Helpers/ArrHelper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Providers/HelperServiceProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/news/categories/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/news/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/NewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FeedbackController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FeedbackController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HelloController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HelloController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/News.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/News.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_25_173555_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_25_173555_create_categories_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_25_173934_create_news_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_25_173934_create_news_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/news/categories/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/news/categories/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/news/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/news/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/components/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/newsElem.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/newsElem.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/news/category.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/news/category.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/news/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/news/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/news/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/news/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/supervisord.log" beforeDir="false" afterPath="$PROJECT_DIR$/supervisord.log" afterDir="false" />
     </list>
@@ -165,6 +172,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -227,6 +235,11 @@
       <workItem from="1614430610083" duration="27000" />
       <workItem from="1614431064004" duration="8096000" />
       <workItem from="1614500900036" duration="9335000" />
+      <workItem from="1614868540948" duration="803000" />
+      <workItem from="1614869765778" duration="9963000" />
+      <workItem from="1614953466314" duration="10308000" />
+      <workItem from="1615030881020" duration="36965000" />
+      <workItem from="1615197335559" duration="1718000" />
     </task>
     <servers />
   </component>

@@ -3,9 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            @forelse ($listNews as $key => $news)
-                @if($news['category'] === $currentCategory)
-                    <x-newsElem :key="$key" :news="$news"></x-newsElem>
+            @forelse ($newsList as $news)
+                @if(in_array(ucfirst($currentCategory), $news['category']))
+                    <x-newsElem :news="$news"></x-newsElem>
                 @endif
             @empty
                 <h4>We have no news from that category. You can share some information</h4>

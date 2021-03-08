@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use Illuminate\Http\Request;
+use App\Helpers\ArrHelper;
 
 class NewsController extends Controller
 {
@@ -15,7 +17,8 @@ class NewsController extends Controller
     public function index()
     {
         //Отвечает за вывод всех записей
-        $newsList = [];
+        $newsList = (new News())->getNews();
+        $newsList = ArrHelper::transformNewsArr(json_decode($newsList, true), 'category');
         return view('admin.news.index', ['newsList' => $newsList]);
 
     }
@@ -45,12 +48,12 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param News $news
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(News $news)
     {
-        //Отображает запись
+        return  view('admin.news..show', ['news' => $news]);;
     }
 
     /**

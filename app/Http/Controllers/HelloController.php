@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HelloController extends Controller
@@ -11,20 +12,9 @@ class HelloController extends Controller
      */
     protected $title = 'Welcome to News Aggregator';
 
-    /**
-     * @var string[] - массив категорий для новостей
-     */
-    protected $categories = [
-        'Native',
-        'Political',
-        'Ecological',
-        'Sports',
-        'IT',
-        'Global'
-    ];
-
     public function index()
     {
-        return view('hello.index', ['title' => $this->title, 'categories' => $this->categories]);
+        $categories = (new Category())->getCategories();
+        return view('hello.index', ['title' => $this->title, 'categories' => $categories]);
     }
 }

@@ -15,6 +15,11 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            // Создать поле title, максимально число симвовлов 191,
+            $table->string('title', 191);
+            $table->string('slug', 191);
+            // nullable - по умолчание поле равно null
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

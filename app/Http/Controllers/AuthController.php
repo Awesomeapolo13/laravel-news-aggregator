@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Category;
 
 class AuthController extends Controller
 {
@@ -11,20 +11,9 @@ class AuthController extends Controller
      */
     protected $title = 'Authorization';
 
-    /**
-     * @var string[] - массив категорий для новостей
-     */
-    protected $categories = [
-        'Native',
-        'Political',
-        'Ecological',
-        'Sports',
-        'IT',
-        'Global'
-    ];
-
     public function index()
     {
-        return view('auth.index', ['title' => $this->title, 'categories' => $this->categories]);
+        $categories = (new Category())->getCategories();
+        return view('auth.index', ['title' => $this->title, 'categories' => $categories]);
     }
 }

@@ -23,6 +23,9 @@
                         Category
                     </th>
                     <th>
+                        Status
+                    </th>
+                    <th>
                         Additions date
                     </th>
                 </tr>
@@ -31,16 +34,27 @@
                 @forelse($newsList as $news)
                     <tr>
                         <td>
-                            {{ $news->id }}
+                            {{ $news['id'] }}
                         </td>
                         <td>
-                            {{ $news->title }}
+                            {{ $news['title'] }}
                         </td>
                         <td>
-                            {{ $news->category }}
+                            @forelse($news['category'] as $category)
+                                {{ $category }}<br>
+                            @empty
+                                No category found
+                            @endforelse
                         </td>
                         <td>
-                            {{ $news->created_at }}
+                            {{ $news['status'] }}
+                        </td>
+                        <td>
+                            {{ $news['created_at'] }}
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.news.show', ['news' => $news['id']]) }}">Show.</a> &nbsp; <a
+                                href="">Upd.</a> &nbsp; <a href="">Del.</a>
                         </td>
                     </tr>
                 @empty
