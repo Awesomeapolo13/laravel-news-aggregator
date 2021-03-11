@@ -8,6 +8,12 @@
                 <a href="{{ route('admin.news.create') }}">Add news</a></strong>
         </div>
 
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+    @endif
+
         <!-- Content Row -->
         <div class="row">
             <table class="table table-bordered">
@@ -34,27 +40,29 @@
                 @forelse($newsList as $news)
                     <tr>
                         <td>
-                            {{ $news['id'] }}
+                            {{ $news->id }}
                         </td>
                         <td>
-                            {{ $news['title'] }}
+                            {{ $news->title }}
                         </td>
                         <td>
-                            @forelse($news['category'] as $category)
-                                {{ $category }}<br>
+                            @forelse($news->categories as $category)
+                                {{ $category->title }}<br>
                             @empty
                                 No category found
                             @endforelse
                         </td>
                         <td>
-                            {{ $news['status'] }}
+                            {{ $news->status }}
                         </td>
                         <td>
-                            {{ $news['created_at'] }}
+                            {{ $news->created_at }}
                         </td>
                         <td>
-                            <a href="{{ route('admin.news.show', ['news' => $news['id']]) }}">Show.</a> &nbsp; <a
-                                href="">Upd.</a> &nbsp; <a href="">Del.</a>
+                            <a href="{{ route('admin.news.show', ['news' => $news]) }}">Show.</a> &nbsp;
+                            <a href="{{ route('admin.news.edit', ['news' => $news]) }}">Upd.</a> &nbsp;
+                            <a
+                                href="">Del.</a>
                         </td>
                     </tr>
                 @empty
@@ -66,6 +74,7 @@
                 @endforelse
                 </tbody>
             </table>
+            {{ $newsList->links() }}
         </div>
 
     </div>

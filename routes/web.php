@@ -67,3 +67,5 @@ Route::get('/auth', [AuthController::class, 'index'])
     ->name('auth');
 
 Route::resource('feedback', FeedbackController::class);
+
+Route::get('/example/{category}', fn(\App\Models\Category $category) => $category);

@@ -4,10 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use \Illuminate\Database\Eloquent\Relations\HasMany;
 
 class News extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title', 'description', 'image', 'status'
+    ];
 
     public function getNews()
     {
@@ -19,8 +25,14 @@ class News extends Model
             ->get();
     }
 
-    public function getOneNews(int $id)
+    public function categories(): BelongsToMany
     {
-        return \DB::table('news')->find($id);
+        //указываем через какую таблиуц и по какому ключу будет осуществляться связь (если связь основных таблиц осуществляется не по ключу id, надо это указать тоже)
+        return $this->belongsToMany(Category::class, 'categories_has_news', 'news_id', 'category_id');
+    }
+
+    public function downloads(): HasMany
+    {
+        return $this->hasMany(Download::class, 'news_id', 'id');
     }
 }

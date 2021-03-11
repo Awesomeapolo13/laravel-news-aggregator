@@ -38,7 +38,7 @@
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="{{ route('admin.categories.index') }}">Categories</a>
                 <a class="collapse-item" href="{{ route('admin.news.index') }}">News</a>
-                <a class="collapse-item" href="{{ route('admin.download.create') }}">Request for download</a>
+                <a class="collapse-item" href="{{ route('admin.download.index') }}">Request for download</a>
             </div>
         </div>
     </li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Description;
 
 class CategoryController extends Controller
 {
@@ -15,8 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $objCategory = new Category();
-        $categories = $objCategory->getCategories();
+        $categories = Category::select('id', 'title', 'slug', 'description', 'created_at')
+            ->with('news')
+            ->paginate(7);
+
         return view('admin.news.categories.index', ['categories' => $categories]);
     }
 
@@ -42,11 +45,17 @@ class CategoryController extends Controller
         $request->validate([
             'title' => 'required'
         ]);
-        //save in database
-        //News::create(request->all());
 
-        //
-//        return back();
+        $data = $request->only('title', 'description');
+        $data['slug'] = \Str::slug($data['title']);
+
+        $create = Category::create($data);
+
+        if ($create) {
+            return redirect()->route('admin.categories.index')->with('success', 'New category added successfully');
+        }
+
+        return back()->withInput()->with('errors', 'New category not added');
 
     }
 
@@ -64,24 +73,37 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.news.categories.edit', ['category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'title' => 'required'
+        ]);
+
+        $data = $request->only('title', 'description');
+        $data['slug'] = \Str::slug($data['title']);
+
+        $update = $category->fill($data)->save();
+
+        if ($update) {
+            return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully ');
+        }
+
+        return back()->withInput()->with('errors', 'Category not updated');
     }
 
     /**
@@ -90,7 +112,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
         //
     }
