@@ -8,7 +8,13 @@
                 <a href="{{ route('admin.categories.create') }}">Add category</a></strong>
         </div>
 
-        <!-- Content Row -->
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+    @endif
+
+    <!-- Content Row -->
         <div class="row">
             <table class="table table-bordered">
                 <thead>
@@ -37,7 +43,7 @@
                             {{ $category->id }}
                         </td>
                         <td>
-                            {{ $category->title }}
+                            {{ $category->title }} (News count: {{ $category->news->count() }})
                         </td>
                         <td>
                             {{ $category->slug }}
@@ -46,8 +52,10 @@
                             {{ $category->created_at }}
                         </td>
                         <td>
-                            <a href="{{ route('admin.categories.show', ['category' => $category->id]) }}">Show.</a> &nbsp; <a
-                                href="">Upd.</a> &nbsp; <a href="">Del.</a>
+                            <a href="{{ route('admin.categories.show', ['category' => $category->id]) }}">Show.</a>
+                            &nbsp; <a
+                                href="{{ route('admin.categories.edit', ['category' => $category]) }}">Upd.</a> &nbsp;
+                            <a href="">Del.</a>
                         </td>
                     </tr>
                 @empty
@@ -59,6 +67,7 @@
                 @endforelse
                 </tbody>
             </table>
+            {{ $categories->links() }}
         </div>
 
     </div>

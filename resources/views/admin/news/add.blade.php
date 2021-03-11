@@ -23,8 +23,12 @@
                 <div class="col-8">
                     <div class="form-group">
                         <label for="categories">Categories</label>
-                        <select class="form-control" name="category_id" id="categories">
-                            <option value="">Choose</option>
+                        <select class="form-control" name="category_id[]" id="categories" multiple>
+                            @forelse($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            @empty
+                                <p>No categories found</p>
+                            @endforelse
                         </select>
                     </div>
                     <div class="form-group">
@@ -45,12 +49,14 @@
                     <div class="form-group">
                         <label for="statuses">News statuses</label>
                         <select class="form-control" name="status" id="statuses">
-                            <option value="">Choose</option>
+                            <option value="" disabled selected>Choose</option>
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                            <option value="blocked">Blocked</option>
                         </select>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-success">Save</button>
-
                 </div>
             </form>
         </div>

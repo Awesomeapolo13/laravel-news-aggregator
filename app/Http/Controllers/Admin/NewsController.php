@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
-use App\Helpers\ArrHelper;
 
 class NewsController extends Controller
 {
@@ -17,9 +17,13 @@ class NewsController extends Controller
     public function index()
     {
         //Отвечает за вывод всех записей
-        $newsList = (new News())->getNews();
-        $newsList = ArrHelper::transformNewsArr(json_decode($newsList, true), 'category');
-        return view('admin.news.index', ['newsList' => $newsList]);
+        $categories = Category::select('id', 'title')
+            ->get();
+        $newsList = News::select('id', 'title', 'description', 'status', 'created_at')
+            ->with('categories')
+            ->paginate(7);
+
+        return view('admin.news.index', ['newsList' => $newsList, 'categories' => $categories]);
 
     }
 
@@ -30,19 +34,38 @@ class NewsController extends Controller
      */
     public function create()
     {
+        $categories = Category::select('id', 'title')
+            ->get();
         //Обрабатывается гет-запросом для вывода формы добавления записи
-        return view('admin.news.add');
+        return view('admin.news.add', ['categories' => $categories]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //Обрабатывает запись которую добавляют в методе create
+        $request->validate([
+            'title' => 'required',
+            'status' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        $newsData = $request->only('title', 'description', 'status');
+
+        $create = News::create($newsData);
+        foreach ($request->only('category_id') as $categoryId) {
+            News::find($create->id)->categories()->attach($categoryId);
+        }
+
+        if ($create) {
+            return redirect()->route('admin.news.index')->with('success', 'New news added successfully');
+        }
+
+        return back()->withInput()->with('errors', 'New news not added');
     }
 
     /**
@@ -53,36 +76,56 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return  view('admin.news..show', ['news' => $news]);;
+        return view('admin.news.show', ['news' => $news]);;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param News $news
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //Отображает форму редактирования записи
+        $categories = Category::select('id', 'title')
+            ->get();
+
+        return view('admin.news.edit', ['news' => $news, 'categories' => $categories]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param News $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, News $news)
     {
-        //Обрабатывает форму отображенную edit
+        $request->validate([
+            'title' => 'required',
+            'status' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        $dataNews = $request->only('title', 'description', 'status');
+        $updateNews = $news->fill($dataNews)->save();
+        $deleteChN = $news->categories()->detach();
+        foreach ($request->only('category_id') as $categoryId) {
+            $news->categories()->attach($categoryId);
+        }
+
+        if ($updateNews && $deleteChN) {
+            return redirect()->route('admin.news.index')->with('success', 'News updated successfully ');
+        }
+
+        return back()->withInput()->with('errors', ['News not updated']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
