@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FeedbackCreateRequest;
 use App\Models\Category;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -37,16 +39,19 @@ class FeedbackController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param FeedbackCreateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FeedbackCreateRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'comment' => 'required',
-        ]);
-        dd($request);
+        $feedbackData = $request->validated();
+        $create = Feedback::create($feedbackData);
+
+        if ($create) {
+            return redirect()->route('feedback.create')->with('success', 'Your feedback successfully sent');
+        }
+
+        return back()->withInput()->with('errors', 'Error, please trie again letter');
     }
 
     /**
@@ -74,7 +79,7 @@ class FeedbackController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

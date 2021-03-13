@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewsCreateRequest;
+use App\Http\Requests\NewsEditRequest;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
@@ -43,18 +45,12 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param NewsCreateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewsCreateRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'status' => 'required',
-            'category_id' => 'required',
-        ]);
-
-        $newsData = $request->only('title', 'description', 'status');
+        $newsData = $request->validated();
 
         $create = News::create($newsData);
         foreach ($request->only('category_id') as $categoryId) {
@@ -96,19 +92,13 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param NewsEditRequest $request
      * @param News $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(NewsEditRequest $request, News $news)
     {
-        $request->validate([
-            'title' => 'required',
-            'status' => 'required',
-            'category_id' => 'required',
-        ]);
-
-        $dataNews = $request->only('title', 'description', 'status');
+        $dataNews = $request->validated();
         $updateNews = $news->fill($dataNews)->save();
         $deleteChN = $news->categories()->detach();
         foreach ($request->only('category_id') as $categoryId) {

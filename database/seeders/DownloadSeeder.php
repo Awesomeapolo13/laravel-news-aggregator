@@ -17,13 +17,12 @@ class DownloadSeeder extends Seeder
         \DB::table('downloads')->insert($this->getData());
     }
 
-    public  function  getData()
+    public function getData()
     {
         $faker = Factory::create('ru_RU');
         $data = [];
 
         for ($i = 0; $i < 15; $i++) {
-            $title = $faker->sentence(2);
             $data[] = [
                 'name' => $faker->name(),
                 'phone' => $faker->regexify('^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$'),

@@ -10,13 +10,13 @@
 
         <!-- Content Row -->
         <div>
-            @if($errors->any())
-                @foreach($errors->all() as $err)
-                    <div class="alert alert-danger">
-                        {{ $err }}
-                    </div>
-                @endforeach
-            @endif
+{{--            @if($errors->any())--}}
+{{--                @foreach($errors->all() as $err)--}}
+{{--                    <div class="alert alert-danger">--}}
+{{--                        {{ $err }}--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            @endif--}}
             <form action="{{ route('admin.news.update', ['news' => $news, 'categories' => $categories]) }}"
                   method="POST">
                 {{--            Подписывает нашу форму, генерирует скрытое поле с токеном --}}
@@ -37,11 +37,21 @@
                                 <p>No categories found</p>
                             @endforelse
                         </select>
+                        @error('category_id')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="title">News title</label>
                         <input type="text" class="form-control" id="title" placeholder="title" name="title"
                                value="{{ $news->title }}">
+                        @error('title')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="description">News description</label>
@@ -73,6 +83,11 @@
                                 @endif>Blocked
                             </option>
                         </select>
+                        @error('status')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <br>
                     <button type="submit" class="btn btn-success">Save</button>
