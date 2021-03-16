@@ -5,10 +5,12 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HelloController;
 use \App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\Account\IndexController as AccountController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController;
 use \App\Http\Controllers\Admin\DownloadController;
+use \App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,14 +31,22 @@ Route::get('/', function () {
 Route::get('/hello', [HelloController::class, 'index'])
     ->name('hello');
 
-
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('/', [IndexController::class, 'index'])
-        ->name('admin');
-    Route::resource('news', AdminNewsController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('download', DownloadController::class);
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/account', [AccountController::class, '__invoke'])
+        ->name('account');
+    Route::group(['middleware' => 'admin'], function ()
+    {
+        Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+            Route::get('/', [IndexController::class, 'index'])
+                ->name('admin');
+            Route::resource('news', AdminNewsController::class);
+            Route::resource('categories', CategoryController::class);
+            Route::resource('download', DownloadController::class);
+            Route::resource('user', UserController::class);
+        });
+    });
 });
+
 
 //Группа страниц для оторажения новостей
 //Группа роутов (prefix - префикс для группы роутов, as - превикс для нейминга)
@@ -52,9 +62,9 @@ Route::group(['prefix' => 'news', 'as' => 'news.'], function () {
         ->name('category');
 
     // Страница отображения страницы конкретной новости
-    Route::get('/{category}/{id}', [NewsController::class, 'show'])
+    Route::get('/{category}/{news}', [NewsController::class, 'show'])
         ->where('category', '\w+')
-        ->where('id', '\d+')
+        ->where('news', '\d+')
         ->name('show');
 });
 
@@ -69,3 +79,12 @@ Route::get('/auth', [AuthController::class, 'index'])
 Route::resource('feedback', FeedbackController::class);
 
 Route::get('/example/{category}', fn(\App\Models\Category $category) => $category);
+
+Route::get('/some', function () {
+    session(['key' => 'value']);
+    return redirect('/hello');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

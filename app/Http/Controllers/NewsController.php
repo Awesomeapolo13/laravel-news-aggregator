@@ -20,9 +20,10 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $categories = (new Category())->getCategories();
-        $newsList = (new News())->getNews();
-        $newsList = ArrHelper::transformNewsArr(json_decode($newsList, true), 'category');
+        $categories = Category::all();
+        $newsList = News::select('id', 'title', 'description', 'status', 'created_at')
+            ->with('categories')
+            ->paginate(7);
 
         return view('news.index', ['title' => $this->title, 'newsList' => $newsList, 'categories' => $categories]);
     }
@@ -34,26 +35,31 @@ class NewsController extends Controller
      */
     public function category(string $category)
     {
-        $categories = (new Category())->getCategories();
-        $newsList = (new News())->getNews();
-        $newsList = ArrHelper::transformNewsArr(json_decode($newsList, true), 'category');
-
-        return view('news.category', ['title' => $this->title, 'currentCategory' => $category, 'newsList' => $newsList, 'categories' => $categories]);
+        $categories = Category::all();
+        $newsList = News::select('id', 'title', 'description', 'status', 'created_at')
+            ->with('categories')
+            ->whereHas('categories', function ($query) use ($category) {
+                $query->where('title', '=', ucfirst($category));
+            })
+            ->paginate(7);
+        return view('news.category',
+            [
+                'title' => $this->title,
+                'currentCategory' => $category,
+                'newsList' => $newsList,
+                'categories' => $categories
+            ]);
     }
 
     /**
      * Метод отображения страницы конкретной новости
      * @param string $category - категория выбранной новости
-     * @param int $id - идентификатор новости
+     * @param News $news
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(string $category, int $id)
+    public function show(string $category, News $news)
     {
-        $categories = (new Category())->getCategories();
-        $newsList = (new News())->getNews();
-        $newsList = ArrHelper::transformNewsArr(json_decode($newsList, true), 'category');
-        $news = ArrHelper::foundNews($newsList, $id, $category);
-
+        $categories = Category::all();
         return view('news.show', ['title' => $this->title, 'currentCategory' => $category, 'categories' => $categories, 'news' => $news]);
     }
 
@@ -63,7 +69,7 @@ class NewsController extends Controller
      */
     public function add()
     {
-        $categories = (new Category())->getCategories();
+        $categories = Category::all();
 
         return view('news.add', ['title' => $this->title, 'subtitle' => 'Add news', 'categories' => $categories]);
     }

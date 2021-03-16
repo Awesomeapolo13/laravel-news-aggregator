@@ -36,7 +36,10 @@
                     <a class="nav-link" href="{{ route('feedback.create') }}">Feedback</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('auth') }}">Sign in</a>
+                    <a class="nav-link" href="{{ route('login') }}">Sign in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Sign up</a>
                 </li>
             </ul>
         </div>

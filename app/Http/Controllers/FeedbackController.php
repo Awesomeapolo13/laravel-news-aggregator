@@ -21,7 +21,7 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        $categories = (new Category())->getCategories();
+        $categories = Category::all();
         return view('feedback.index', ['title' => $this->title, 'categories' => $categories]);
     }
 
@@ -32,7 +32,7 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        $categories = (new Category())->getCategories();
+        $categories = Category::all();
         return view('feedback.index', ['title' => $this->title, 'categories' => $categories]);
     }
 

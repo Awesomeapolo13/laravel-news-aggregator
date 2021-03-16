@@ -26,7 +26,7 @@ class DownloadController extends Controller
 //            ->select('downloads.id', 'downloads.name', 'downloads.phone', 'downloads.email', 'downloads.info', 'downloads.created_at', 'news.id as newsId', 'news.title as newsTitle')
 //            ->get();
 
-        dd($downloads);
+//        dd($downloads);
 
         return view('admin.news.download.index', ['downloads' => $downloads, 'newsList' => $newsList]);
     }
