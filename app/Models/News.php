@@ -12,7 +12,7 @@ class News extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'image', 'status'
+        'title', 'description', 'image', 'status', 'link', 'guid',
     ];
 
     public function getNews()
