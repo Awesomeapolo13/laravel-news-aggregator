@@ -5,7 +5,11 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HelloController;
 use \App\Http\Controllers\FeedbackController;
+use \App\Http\Controllers\ParseController;
+// контроллер авторизации
 use App\Http\Controllers\Account\IndexController as AccountController;
+use \App\Http\Controllers\SocialiteController;
+//Контроллеры админки
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -88,3 +92,12 @@ Route::get('/some', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/parse/news', ParseController::class);
+Route::get('/parse/politics', [ParseController::class, 'politics']);
+
+Route::group(['middleware' => 'guest'], function()
+{
+    Route::get('/auth/vk', [SocialiteController::class, 'init'])->name('vk.init');
+    Route::get('/auth/vk/callback', [SocialiteController::class, 'callback'])->name('vk.callback');
+});

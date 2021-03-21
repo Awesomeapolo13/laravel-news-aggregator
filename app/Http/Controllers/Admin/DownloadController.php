@@ -20,7 +20,7 @@ class DownloadController extends Controller
         $downloads = Download::select('id', 'name', 'phone', 'email', 'info', 'created_at')
             ->with('news')
             ->paginate(7);
-
+//        dd($downloads);
 //       $downloads = \DB::table('downloads')
 //            ->leftjoin('news', 'news.id', '=', 'downloads.news_id')
 //            ->select('downloads.id', 'downloads.name', 'downloads.phone', 'downloads.email', 'downloads.info', 'downloads.created_at', 'news.id as newsId', 'news.title as newsTitle')

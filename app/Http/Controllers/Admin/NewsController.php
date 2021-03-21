@@ -100,7 +100,7 @@ class NewsController extends Controller
     {
         $dataNews = $request->validated();
         $updateNews = $news->fill($dataNews)->save();
-        $deleteChN = $news->categories()->detach();
+        $deleteChN = $news->categories()->detach(); // удаление старых связей в таблице categories_has_news
         foreach ($request->only('category_id') as $categoryId) {
             $news->categories()->attach($categoryId);
         }
