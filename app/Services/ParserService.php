@@ -8,19 +8,18 @@ use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ParserService
 {
-    protected $parsingLinks = [ // ссылки для парсинга
-        'https://news.yandex.ru/army.rss',
-        'https://news.yandex.ru/music.rss',
-        'https://news.yandex.ru/auto.rss',
-        'https://news.yandex.ru/politics.rss'
-//        'https://news.yandex.ru/army.rss',
-    ];
+    protected $url;
 
-    public function start(string $url): array
+    public function __construct(string $url)
     {
-        $xml = XmlParser::load($url);
+        $this->url = $url;
+    }
 
-        return $xml->parse([
+    public function start(): array
+    {
+        $xml = XmlParser::load($this->url);
+
+        $data = $xml->parse([
             'title' => [
                 'uses' => 'channel.title',
             ],
@@ -37,5 +36,8 @@ class ParserService
                 'uses' => 'channel.item[title,link,guid,description,pubDate]'
             ]
         ]);
+
+        \Storage::disk('public')
+            ->put('news/' . $this->url . '.txt', json_encode($data));
     }
 }

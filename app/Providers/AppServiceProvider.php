@@ -16,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ParserService::class, function ()
-        {
-            return new ParserService();
-        });
+//        $this->app->bind(ParserService::class, function ()
+//        {
+//            return new ParserService();
+//        });
 
         $this->app->bind(SocialService::class, function ()
         {

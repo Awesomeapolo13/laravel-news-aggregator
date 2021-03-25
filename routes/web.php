@@ -94,7 +94,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/parse/news', ParseController::class);
-Route::get('/parse/politics', [ParseController::class, 'politics']);
+//Route::get('/parse/politics', [ParseController::class, 'politics']);
 
 Route::group(['middleware' => 'guest'], function()
 {

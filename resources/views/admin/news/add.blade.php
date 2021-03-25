@@ -17,7 +17,7 @@
 {{--                    </div>--}}
 {{--                @endforeach--}}
 {{--            @endif--}}
-            <form action="{{ route('admin.news.store') }}" method="POST">
+            <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
                 {{--            Подписывает нашу форму, генерирует скрытое поле с токеном --}}
                 @csrf
                 <div class="col-8">
@@ -76,3 +76,57 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script type="text/javascript">
+        ClassicEditor
+            .create(document.querySelector('#description'), {
+
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'bold',
+                        'italic',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'outdent',
+                        'indent',
+                        '|',
+                        'blockQuote',
+                        'undo',
+                        'redo'
+                    ]
+                },
+                language: 'en',
+                image: {
+                    toolbar: [
+                        'imageTextAlternative',
+                        'imageStyle:full',
+                        'imageStyle:side'
+                    ]
+                },
+                table: {
+                    contentToolbar: [
+                        'tableColumn',
+                        'tableRow',
+                        'mergeTableCells'
+                    ]
+                },
+                licenseKey: '',
+
+
+            })
+            .then(editor => {
+                window.editor = editor;
+
+            })
+            .catch(error => {
+                console.error('Oops, something went wrong!');
+                console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                console.warn('Build id: xr1lbvshn4k8-rzn5b6r6hoyd');
+                console.error(error);
+            });
+    </script>
+@endpush

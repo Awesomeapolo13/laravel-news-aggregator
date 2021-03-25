@@ -93,8 +93,10 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
+{{--<script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>--}}
+<script src="{{ asset('assets/ckeditor5/build/ckeditor.js') }}"></script>
 
-
+@stack('js')
 </body>
 
 </html>

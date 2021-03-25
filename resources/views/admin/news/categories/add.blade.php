@@ -10,13 +10,13 @@
 
         <!-- Content Row -->
         <div>
-{{--            @if($errors->any())--}}
-{{--                @foreach($errors->all() as $err)--}}
-{{--                    <div class="alert alert-danger">--}}
-{{--                        {{ $err }}--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            @endif--}}
+            {{--            @if($errors->any())--}}
+            {{--                @foreach($errors->all() as $err)--}}
+            {{--                    <div class="alert alert-danger">--}}
+            {{--                        {{ $err }}--}}
+            {{--                    </div>--}}
+            {{--                @endforeach--}}
+            {{--            @endif--}}
             <form action="{{ route('admin.categories.store') }}" method="POST">
                 {{--            Подписывает нашу форму, генерирует скрытое поле с токеном --}}
                 @csrf
@@ -26,9 +26,9 @@
                         <input type="text" class="form-control" placeholder="title" name="title"
                                value="{{ old('title') }}">
                         @error('title')
-                            <div class="alert alert-danger">
-                                {{ $message }}
-                            </div>
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -44,3 +44,57 @@
 
     </div>
 @endsection
+@push('js')
+    <script type="text/javascript">
+        ClassicEditor
+            .create(document.querySelector('#description'), {
+
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'bold',
+                        'italic',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'outdent',
+                        'indent',
+                        '|',
+                        'blockQuote',
+                        'undo',
+                        'redo'
+                    ]
+                },
+                language: 'en',
+                image: {
+                    toolbar: [
+                        'imageTextAlternative',
+                        'imageStyle:full',
+                        'imageStyle:side'
+                    ]
+                },
+                table: {
+                    contentToolbar: [
+                        'tableColumn',
+                        'tableRow',
+                        'mergeTableCells'
+                    ]
+                },
+                licenseKey: '',
+
+
+            })
+            .then(editor => {
+                window.editor = editor;
+
+            })
+            .catch(error => {
+                console.error('Oops, something went wrong!');
+                console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                console.warn('Build id: xr1lbvshn4k8-rzn5b6r6hoyd');
+                console.error(error);
+            });
+    </script>
+@endpush

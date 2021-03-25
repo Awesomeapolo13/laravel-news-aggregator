@@ -52,6 +52,18 @@ class NewsController extends Controller
     {
         $newsData = $request->validated();
 
+        //загрузка файла
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            //формирование имени файла (после точки указывается расширение
+            $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+            // Если нужно сохранить имя файла, то указывать $fileName не нужно
+            // в параметре options можно указать место сохранения (места для сохранения указаны в /config/filesystem.php)
+
+
+            $newsData['image'] = $image->storeAs('/news', $fileName, 'public');
+        }
+
         $create = News::create($newsData);
         foreach ($request->only('category_id') as $categoryId) {
             News::find($create->id)->categories()->attach($categoryId);
